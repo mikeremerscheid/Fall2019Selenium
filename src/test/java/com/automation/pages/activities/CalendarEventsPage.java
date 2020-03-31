@@ -27,11 +27,14 @@ public class CalendarEventsPage extends AbstractPageBase {
 
     public String getStartTime() {
         BrowserUtils.waitForPageToLoad(20);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[id^='time_selector_oro_calendar_event_form_start']")));
+        wait.until(ExpectedConditions.visibilityOf(startTime));
         return startTime.getAttribute("value");
     }
 
     public String getEndTime() {
         BrowserUtils.waitForPageToLoad(20);
+        wait.until(ExpectedConditions.visibilityOf(endTime));
         return endTime.getAttribute("value");
     }
 
@@ -45,7 +48,9 @@ public class CalendarEventsPage extends AbstractPageBase {
 
     public void clickToCreateCalendarEvent() {
         BrowserUtils.waitForPageToLoad(20);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[title='Create Calendar event']")));
         wait.until(ExpectedConditions.elementToBeClickable(createCalendarEvent)).click();
+        BrowserUtils.waitForPageToLoad(20);
     }
 
     public String getStartDate() {
