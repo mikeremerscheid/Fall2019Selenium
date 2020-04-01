@@ -16,8 +16,8 @@ public abstract class AbstractTestBase {
     protected Actions actions;
 
     @BeforeMethod
-    public void setup(){
-        String URL = ConfigurationReader.getProperty("qa3");
+    public void setup() {
+        String URL = ConfigurationReader.getProperty("qa1");
         Driver.getDriver().get(URL);
         Driver.getDriver().manage().window().maximize();
         wait = new WebDriverWait(Driver.getDriver(), 15);
@@ -26,12 +26,13 @@ public abstract class AbstractTestBase {
 
 
     @AfterMethod
-    public void teardown(ITestResult iTestResult){
+    public void teardown(ITestResult iTestResult) {
+        //ITestResult class describes the result of a test.
         //if test failed, take a screenshot
-        if(iTestResult.getStatus() == iTestResult.FAILURE){
+        if (iTestResult.getStatus() == ITestResult.FAILURE) {
+            //screenshot will have a name of the test
             BrowserUtils.getScreenshot(iTestResult.getName());
         }
         Driver.closeDriver();
-
     }
 }
